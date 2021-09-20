@@ -1,0 +1,51 @@
+body{
+background-color: #6b1dc4;
+}
+
+.mainContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 64px;
+}
+
+.dataContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 600px;
+}
+
+.header {
+  text-align: center;
+  font-size: 42px;
+  font-weight: 600;
+  color:#f6f6f6;
+
+
+}
+
+.bio {
+  text-align: center;
+  color: #f6f6f6;
+  margin-top: 16px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 18px;
+
+
+}
+
+.waveButton {
+  cursor: pointer;
+  margin-top: 18px;
+  padding: 8px;
+  border: 0;
+  border-radius: 8px;
+  background-color: rgb(187, 255, 0);
+  font-size: 18px;
+  color: #28064e;
+  font-family: 'MuseoModerno', cursive;
+  font-weight: 600;
+
+
+}
