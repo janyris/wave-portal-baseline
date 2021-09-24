@@ -1,9 +1,22 @@
-import * as React from "react";
+import React,{ useEffect } from "react";
 import { ethers } from "ethers";
-import "./App.css";
+import './App.css';
 
-export default function App() {
-  const wave = () => {};
+const App = () => {
+const checkIfWalletIsConnected = () => {
+
+
+
+const { ethereum } = window;
+
+
+if (!ethereum) {
+  console.log("Make sure you have metamask!");
+  return;
+} else {
+  console.log("We have the ethereum object", ethereum);
+  }
+}
 
   return (
     <div className="mainContainer">
@@ -12,10 +25,12 @@ export default function App() {
 
         <div className="bio">I'm Janyris. I'm a Designer and Developer learning Blockchain Development. Connect your Ethereum wallet and wave at me!</div>
 
-        <button className="waveButton" onClick={wave}>
+        <button className="waveButton" onClick={null}>
           👋🏽 Wave at Me
         </button>
       </div>
     </div>
   );
 }
+
+export default App
