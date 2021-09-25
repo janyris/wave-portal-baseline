@@ -92,7 +92,7 @@ useEffect(() =>{
 *If there is no currentAccount render this button
 */}
 {!currentAccount && (
-<button className="waveButton" onClick={null}>
+<button className="waveButton" onClick={connectWallet}>
 🦊 Connect Wallet
 </button>
 
