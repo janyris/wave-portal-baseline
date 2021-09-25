@@ -25,6 +25,16 @@ background-color: #6b1dc4;
 
 }
 
+.intro {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+  color:#f6f6f6;
+  font-family: 'IBM Plex Mono', monospace;
+
+}
+
+
 .bio {
   text-align: center;
   color: #f6f6f6;
