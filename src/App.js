@@ -8,9 +8,49 @@ import waveportal from './utils/WavePortal.json';
 const App = () => {
   const [currentAccount, setCurrentAccount] = useState("");
 
-  const contractAddress = "0xf9Aa444B1d2AA7511dd3B547b0a79bd7bAf790Dc";
 
 
+const [allWaves, setAllWaves] = useState([]);
+const contractAddress = "0xb27Db0fB2E5FE9861D6ceB903dDAA1D69bFc8c62";
+
+ const getAllWaves = async () => {
+try {
+  const { ethereum } = window;
+  if (ethereum) {
+    const provider = new ethers.providers.Web3Provider(ethereum);
+    const signer =provider.getSigner();
+    const waveportalContract = new ethers.Contract(contractAddress, contractABI, signer);
+
+
+const getAllWaves = async () => {
+    try {
+      const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const waveportalContract = new ethers.Contract(contractAddress, contractABI, signer);
+
+
+        const waves = await waveportalContract.getAllWaves();
+
+
+        let wavesCleaned = [];
+        waves.forEach(wave => {
+          wavesCleaned.push({
+            address: wave.waver,
+            timestamp: new Date(wave.timestamp * 1000),
+            message: wave.message
+          });
+        });
+
+        setAllWaves(wavesCleaned);
+      } else {
+        console.log("Ethereum object doesn't exist!")
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
 
 
@@ -145,6 +185,5 @@ const App = () => {
   );
 }
 
-
-
 export default App;
+
