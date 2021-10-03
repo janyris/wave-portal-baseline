@@ -6,7 +6,7 @@ import waveportal from "./utils/WavePortal.json";
 const App = () => {
   const [currentAccount, setCurrentAccount] = useState("");
 
-  const [allWaves, setAllWaves] = useState([]);
+  const [allWaves, setAllWaves, message, setMessage] = useState([]);
   const contractAddress = "0xb27Db0fB2E5FE9861D6ceB903dDAA1D69bFc8c62";
 
   const getAllWaves = async () => {
@@ -16,6 +16,7 @@ const App = () => {
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
         const waveportalContract = new ethers.Contract(contractAddress, waveportal.ABI, signer);
+
 
         const waves = await waveportalContract.getAllWaves();
 
@@ -94,6 +95,7 @@ const App = () => {
     try {
       const { ethereum } = window;
 
+
       if (!ethereum) {
         alert("Get MetaMask!");
         return;
@@ -120,7 +122,7 @@ const App = () => {
         let count = await waveportalContract.getTotalWaves();
         console.log("Retrieved total wave count...", count.toNumber());
 
-        const waveTxn = await waveportalContract.wave();
+        const waveTxn = await waveportalContract.wave("this is a message");
         console.log("Mining...", waveTxn.hash);
 
         await waveTxn.wait();
@@ -134,27 +136,42 @@ const App = () => {
     } catch (error) {
       console.log(error);
     }
+
+
+
   };
 
   useEffect(() => {
     checkIfWalletIsConnected();
   }, []);
 
+
   return (
     <div className="mainContainer">
       <div className="dataContainer">
-        <div className="header">🌈 What's Up!</div>
+        <div className="header">
+          <span>🌈</span> What's Up!
+        </div>
         <div className="intro"> I'm Janyris.</div>
 
         <div className="bio"> I'm a Designer and Developer learning Blockchain Development. Connect your Ethereum wallet and wave at me!</div>
 
+        {/* textbox */}
+
+
+
+    <textarea value={"Send some words!"} onChange={""} placeholder="Message" />
         <button className="waveButton" onClick={wave}>
-          👋🏽 Wave at Me
+          <span>👋🏽</span> Wave at Me
         </button>
+
+
+
+
 
         {!currentAccount && (
           <button className="waveButton" onClick={connectWallet}>
-            🦊 Connect Wallet
+            <span>🦊</span> Connect Wallet
           </button>
         )}
 
@@ -167,6 +184,10 @@ const App = () => {
             </div>
           );
         })}
+
+
+
+
       </div>
     </div>
   );
