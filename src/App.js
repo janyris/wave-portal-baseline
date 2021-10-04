@@ -91,6 +91,8 @@ const App = () => {
       }
 
       const accounts = await ethereum.request({ method: "eth_accounts" });
+      ;
+
 
       if (accounts.length !== 0) {
         const account = accounts[0];
@@ -154,6 +156,8 @@ const App = () => {
 
   };
 
+// const [message, setMessage] = useState("");
+
   useEffect(() => {
     checkIfWalletIsConnected();
   }, []);
@@ -172,8 +176,7 @@ const App = () => {
         {/* textbox */}
 
 
-
-        <textarea value={"Send some words!"} onChange={""} placeholder="Message" />
+        <textarea value={"Send some words!"} input type="text"  placeholder="Message"  />
         <button className="waveButton" onClick={wave}>
           <span>👋🏽</span> Wave at Me
         </button>
@@ -181,29 +184,28 @@ const App = () => {
 
 
 
-
-        {!currentAccount && (
-          <button className="waveButton" onClick={connectWallet}>
-            <span>🦊</span> Connect Wallet
+          {!currentAccount && (
+            <button className="waveButton" onClick={connectWallet}>
+              <span>🦊</span> Connect Wallet
           </button>
-        )}
+          )}
 
-        {allWaves.map((wave, index) => {
-          return (
-            <div key={index} style={{ backgroundColor: "OldLace", marginTop: "16px", padding: "8px" }}>
-              <div>Address: {wave.address}</div>
-              <div>Time: {wave.timestamp.toString()}</div>
-              <div>Message: {wave.message}</div>
-            </div>
-          );
-        })}
-
-
+          {allWaves.map((wave, index) => {
+            return (
+              <div key={index} style={{ backgroundColor: "OldLace", marginTop: "16px", padding: "8px" }}>
+                <div>Address: {wave.address}</div>
+                <div>Time: {wave.timestamp.toString()}</div>
+                <div>Message: {wave.message}</div>
+              </div>
+            );
+          })}
 
 
+
+
+        </div>
       </div>
-    </div>
-  );
-};
+      );
+    };
 
-export default App;
+    export default App;
