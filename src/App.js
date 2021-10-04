@@ -7,7 +7,7 @@ const App = () => {
   const [currentAccount, setCurrentAccount] = useState("");
 
   const [allWaves, setAllWaves, message, setMessage] = useState([]);
-  const contractAddress = "00xa9EbE88777fEeD3A937919CAeBe674663F8482b7";
+  const contractAddress = "0xCbe7A0a05e7A302769B56FaF89F0Dcf2E617dA63";
 
   const getAllWaves = async () => {
     try {
@@ -15,10 +15,10 @@ const App = () => {
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
-        const waveportalContract = new ethers.Contract(contractAddress, waveportal.ABI, signer);
+        const wavePortalContract = new ethers.Contract(contractAddress, waveportal.ABI, signer);
 
 
-        const waves = await waveportalContract.getAllWaves();
+        const waves = await wavePortalContract.getAllWaves();
 
         let wavesCleaned = [];
         waves.forEach((wave) => {
@@ -30,13 +30,26 @@ const App = () => {
         });
 
         setAllWaves(wavesCleaned);
+
+
+        wavePortalContract.on("NewWave", (from, timestamp, message) => {
+          console.log("NewWave", from, timestamp, message);
+
+          setAllWaves(prevState => [...prevState, {
+            address: from,
+            timestamp: new Date(timestamp * 1000),
+            message: message
+          }]);
+        });
       } else {
-        console.log("Ethereum object doesn't exist!");
+        console.log("Ethereum object doesn't exist!")
       }
     } catch (error) {
       console.log(error);
     }
-  };
+  }
+
+
 
   const checkIfWalletIsConnects = async () => {
     try {
@@ -160,7 +173,7 @@ const App = () => {
 
 
 
-    <textarea value={"Send some words!"} onChange={""} placeholder="Message" />
+        <textarea value={"Send some words!"} onChange={""} placeholder="Message" />
         <button className="waveButton" onClick={wave}>
           <span>👋🏽</span> Wave at Me
         </button>
