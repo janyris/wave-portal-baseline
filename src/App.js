@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
 import { ethers } from "ethers";
 import "./App.css";
 import waveportal from "./utils/WavePortal.json";
 
 const App = () => {
   const [currentAccount, setCurrentAccount] = useState("");
-
+  const [name, setName] = useState("");
   const [allWaves, setAllWaves, message, setMessage] = useState([]);
   const contractAddress = "0xCbe7A0a05e7A302769B56FaF89F0Dcf2E617dA63";
 
@@ -18,20 +19,22 @@ const App = () => {
         const wavePortalContract = new ethers.Contract(contractAddress, waveportal.ABI, signer);
 
 
-        const waves = await wavePortalContract.getAllWaves();
+    const waves = await wavePortalContract.getAllWaves();
 
         let wavesCleaned = [];
-        waves.forEach((wave) => {
+        waves.forEach(wave => {
           wavesCleaned.push({
             address: wave.waver,
             timestamp: new Date(wave.timestamp * 1000),
-            message: wave.message,
+            message: wave.message
           });
         });
 
         setAllWaves(wavesCleaned);
 
-
+        /**
+         * Listen in for emitter events!
+         */
         wavePortalContract.on("NewWave", (from, timestamp, message) => {
           console.log("NewWave", from, timestamp, message);
 
@@ -134,6 +137,7 @@ const App = () => {
         const signer = provider.getSigner();
         const waveportalContract = new ethers.Contract(contractAddress, waveportal.abi, signer);
 
+
         let count = await waveportalContract.getTotalWaves();
         console.log("Retrieved total wave count...", count.toNumber());
 
@@ -160,6 +164,7 @@ const App = () => {
 
   useEffect(() => {
     checkIfWalletIsConnected();
+
   }, []);
 
 
@@ -167,32 +172,31 @@ const App = () => {
     <div className="mainContainer">
       <div className="dataContainer">
         <div className="header">
-          <span>🌈</span> What's Up!
+          Hi there!
         </div>
-        <div className="intro"> I'm Janyris.</div>
 
-        <div className="bio"> I'm a Designer and Developer learning Blockchain Development. Connect your Ethereum wallet and wave at me!</div>
+        <div className="bio"> I'm Janyris. I'm a Designer and Developer building in Web3. Connect your Ethereum wallet and wave at me! </div>
+
 
         {/* textbox */}
+<textarea
+					id="message"
+					className="textBox"
+					// disabled={disableInput}
+					value={message}/>
 
 
-        <textarea value={"Send some words!"} input type="text"  placeholder="Message"  />
         <button className="waveButton" onClick={wave}>
           <span>👋🏽</span> Wave at Me
         </button>
 
-
-
-
           {!currentAccount && (
-            <button className="waveButton" onClick={connectWallet}>
-              <span>🦊</span> Connect Wallet
-          </button>
+            <button className="waveButton" onClick={connectWallet}>Connect Wallet</button>
           )}
 
           {allWaves.map((wave, index) => {
             return (
-              <div key={index} style={{ backgroundColor: "OldLace", marginTop: "16px", padding: "8px" }}>
+              <div key={index} style={{ backgroundColor: "White", marginTop: "16px", padding: "8px" }}>
                 <div>Address: {wave.address}</div>
                 <div>Time: {wave.timestamp.toString()}</div>
                 <div>Message: {wave.message}</div>
@@ -209,3 +213,4 @@ const App = () => {
     };
 
     export default App;
+

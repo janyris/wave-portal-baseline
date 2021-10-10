@@ -1,5 +1,5 @@
 body{
-background-color: #6b1dc4;
+background-color: #171717;
 }
 
 .mainContainer {
@@ -21,7 +21,7 @@ background-color: #6b1dc4;
   font-size: 42px;
   font-weight: 600;
   color:#f6f6f6;
-
+  font-family: 'Nunito', sans-serif;
 
 }
 
@@ -38,24 +38,38 @@ background-color: #6b1dc4;
 .bio {
   text-align: center;
   color: #f6f6f6;
-  margin-top: 16px;
+  margin-top: 8px;
   font-family: 'IBM Plex Mono', monospace;
   font-size: 18px;
+  padding: 10px;
 
 
 }
 
+
 .waveButton {
   cursor: pointer;
-  margin-top: 18px;
+  margin-top: 22px;
   padding: 8px;
   border: 0;
   border-radius: 8px;
   background-color: rgb(187, 255, 0);
   font-size: 18px;
   color: #28064e;
-  font-family: 'MuseoModerno', cursive;
+  font-family: 'IBM Plex Mono', monospace;
   font-weight: 600;
+
+
+}
+
+.textBox {
+border-radius: 8px;
+background-color: #6b1dc4;
+color:#f6f6f6;
+cursor: pointer;
+margin-top: 18px;
+padding: 28px;
+border: 0;
 
 
 }
