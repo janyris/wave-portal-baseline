@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
 import { ethers } from "ethers";
 import "./App.css";
 import waveportal from "./utils/WavePortal.json";
@@ -172,7 +171,7 @@ const App = () => {
     <div className="mainContainer">
       <div className="dataContainer">
         <div className="header">
-          Hi there!
+           🌈 Hey there!
         </div>
 
         <div className="bio"> I'm Janyris. I'm a Designer and Developer building in Web3. Connect your Ethereum wallet and wave at me! </div>
@@ -206,9 +205,9 @@ const App = () => {
 
 
 
-
         </div>
       </div>
+
       );
     };
 
